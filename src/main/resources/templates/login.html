@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <title>Sign in</title>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/style.css" />
 
-    </head>
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="/style.css" />
 
-    <body>
-        <div th:fragment="content">
-            <div class="login">
-                <h1>Login</h1>
-                <a> Welcome back</a>
+</head>
 
-                <div class="inputs">
-                    <div class="login-input">
-                        <a>Email</a>
-                        <input>
-                    </div>
+<div th:fragment="content">
+    <div class="login">
+        <h1>Login</h1>
+        <a> Welcome back</a>
 
-                    <div class="login-input">
-                        <a>Password</a>
-                        <input>
-                    </div>
-                </div>
-
-                 <a class="login-error">Wrong password</a>
-                <button class="login-b"> Login </button>
+        <div class="inputs">
+            <div class="login-input">
+                <a>Email</a>
+                <input>
             </div>
 
+            <div class="login-input">
+                <a>Password</a>
+                <input>
+            </div>
         </div>
-    </body>
-</html>
+
+         <a class="login-error">Wrong password</a>
+        <button class="login-b"> Login </button>
+    </div>
+
+</div>

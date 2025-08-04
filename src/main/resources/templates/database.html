@@ -1,17 +1,153 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <title>Home</title>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="/style.css" />
+  <head>
+    <title>DataBase</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/database.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
-</head>
+  </head>
 
-<body>
-<div th:fragment="content">
-  <h1>Добро пожаловать на DataBase</h1>
+<div>
+    <div th:fragment="content">
+
+        <div class="container">
+
+            <div class="b">
+                <div class="a">
+
+                    <form method="get" th:action="@{/database}" class="country-selector">
+
+                        <label for="country-input">Land eingeben:</label>
+
+                        <input type="text" id="country-input" name="country" list="countries-list"
+                            th:value="${selectedCountry}" />
+
+                        <datalist id="countries-list">
+                            <option th:each="country : ${countries}" th:value="${country}"></option>
+                        </datalist>
+
+                        <button type="submit" class="search-b">Suchen</button>
+                    </form>
+
+                    <div  class="filter" th:if="${selectedCountry != null and !selectedCountry.isEmpty()}">
+
+                        <a>Gefilterte Daten für: <span th:text="${selectedCountry}"></span></a>
+
+                        <a href="/database"
+                            class="reset-b"
+                            onclick="document.getElementById('country-input').value = '';">
+                            Reset
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="pagination">
+                    <ul>
+
+                        <li th:classappend="${currentPage == 0} ? 'disabled'">
+                            <a th:if="${currentPage != 0}" th:href="@{/database(page=0, country=${selectedCountry})}">«</a>
+                            <span th:if="${currentPage == 0}">«</span>
+                        </li>
+
+                        <li th:classappend="${currentPage == 0} ? 'disabled'">
+                            <a th:if="${currentPage != 0}" th:href="@{/database(page=${currentPage - 1}, country=${selectedCountry})}">‹</a>
+                            <span th:if="${currentPage == 0}">‹</span>
+                        </li>
+
+                        <li th:if="${currentPage == 0}" th:classappend="'active'">
+                            <span>1</span>
+                        </li>
+
+                        <li th:if="${currentPage == 0 and totalPages > 1}">
+                            <a th:href="@{/database(page=1, country=${selectedCountry})}">2</a>
+                        </li>
+
+                        <li th:if="${currentPage > 1}">
+                            <a th:href="@{/database(page=0, country=${selectedCountry}, sort=${sortField}, dir=${sortDir})}">1</a>
+                        </li>
+
+                        <li class="dots" th:if="${currentPage > 2}">
+                            <a>...</a>
+                        </li>
+
+                        <li th:if="${currentPage == totalPages - 1 and totalPages > 1}">
+                            <a th:href="@{/database(page=${currentPage - 1}, country=${selectedCountry})}" th:text="${currentPage}"></a>
+                        </li>
+
+                        <li th:if="${currentPage == totalPages - 1}" th:classappend="'active'">
+                            <span th:text="${currentPage + 1}"></span>
+                        </li>
+
+
+                        <li th:if="${currentPage > 0 and currentPage < totalPages - 1}">
+                            <a th:href="@{/database(page=${currentPage - 1}, country=${selectedCountry})}" th:text="${currentPage}"></a>
+                        </li>
+
+                        <li th:if="${currentPage > 0 and currentPage < totalPages - 1}" class="active">
+                            <span th:text="${currentPage + 1}"></span>
+                        </li>
+
+                        <li th:if="${currentPage > 0 and currentPage < totalPages - 1}">
+                            <a th:href="@{/database(page=${currentPage + 1}, country=${selectedCountry})}" th:text="${currentPage + 2}"></a>
+                        </li>
+
+                        <li class="dots" th:if="${currentPage + 2 < totalPages - 1}">
+                            <a>...</a>
+                        </li>
+
+                        <li th:if="${currentPage + 2 < totalPages}">
+                            <a th:href="@{/database(page=${totalPages - 1}, country=${selectedCountry}, sort=${sortField}, dir=${sortDir})}" th:text="${totalPages}"></a>
+                        </li>
+
+                        <li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                            <a th:if="${currentPage != totalPages - 1}" th:href="@{/database(page=${currentPage + 1}, country=${selectedCountry})}">›</a>
+                            <span th:if="${currentPage == totalPages - 1}">›</span>
+                        </li>
+
+                        <li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                            <a th:if="${currentPage != totalPages - 1}" th:href="@{/database(page=${totalPages - 1}, country=${selectedCountry})}">»</a>
+                            <span th:if="${currentPage == totalPages - 1}">»</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        <table id="table">
+
+        <tr class="header-row" >
+        <th>
+        Land
+        <a th:href="@{/database(sort='country', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})} " class="sort-btn">⇅</a>
+        </th>
+        <th>
+        Jahr
+        <a th:href="@{/database(sort='year', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})}" class="sort-btn">⇅</a>
+        </th>
+        <th>
+        Emissionen (kt)
+        <a th:href="@{/database(sort='emissions', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})}" class="sort-btn">⇅</a>
+        </th>
+        </tr>
+
+        <tr th:each="emission : ${emissions}">
+        <td th:text="${emission.country}"></td>
+        <td th:text="${emission.year}"></td>
+        <td th:text="${emission.emissions}"></td>
+        </tr>
+
+        </table>
+
+
+
+
+
+        </div>
+    </div>
 </div>
-</body>
-</html>
+
 

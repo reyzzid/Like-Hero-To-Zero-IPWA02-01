@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/co2-logo.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/database.css" />
     <title th:text="${pageTitle}">Default Title</title>
 
 <!--    <meta http-equiv="refresh" content="5">-->
 
 </head>
 
-<body>
-    <div class="header">
+    <body>
+        <div class="wrapper">
+            <div class="header">
 
-        <div class="navbar">
+                <div class="navbar">
 
-            <a th:href="@{/}">
-                <img class="logo" src="/co2-logo.svg" alt="Logo" />
-            </a>>
+                    <a th:href="@{/}">
+                        <img class="logo" src="/co2-logo.svg" alt="Logo" />
+                    </a>
 
-            <div class="menu">
-                <a th:href="@{/}" th:classappend="${currentPath == '/'} ? 'active'">Home</a>
-                <a th:href="@{/database}" th:classappend="${currentPath == '/database'} ? 'active'">Database</a>
-                <a class="adminpanel "th:href="@{/database}" th:classappend="${currentPath == '/adminpanel'} ? 'active'">Admin Panel</a>
+                    <div class="menu">
+                        <a th:href="@{/}" th:classappend="${currentPath == '/'} ? 'active'">Home</a>
+                        <a th:href="@{/database}" th:classappend="${currentPath == '/database'} ? 'active'">Database</a>
+                        <a class="adminpanel "th:href="@{/database}" th:classappend="${currentPath == '/adminpanel'} ? 'active'">Admin Panel</a>
+                    </div>
+
+                    <button class="sign-in" onclick="window.location.href='/login'"> Sign In </button>
+
+
+                </div>
+
             </div>
 
-            <button class="sign-in" onclick="window.location.href='/login'"> Sign In </button>
+            <div class="main">
+                <div th:replace="~{${page} :: content}"></div>
+            </div>
 
 
+            <div class="footer">
+
+                <div class="footer-navbar">
+
+                    <div class="footer-menu">
+                        <a href=#>Impressum</a>
+                        <a href=#>Information & Hilfe</a>
+                        <a href=#>FAQs</a>
+                        <a href=#>Nutzungsbedingungen</a>
+                        <a href=#>Datenschutzerklärung</a>
+                    </div>
+
+                    <div class="footer-menu">
+                        <a> © CO2 2025</a>
+
+                    </div>
+                </div>
+            </div>
         </div>
-
-    </div>
-
-    <div class="main">
-        <div th:replace="~{${page} :: content}"></div>
-    </div>
-
-
-    <div class="footer">
-
-        <div class="footer-navbar">
-
-            <div class="footer-menu">
-                <a href=#>Impressum</a>
-                <a href=#>Information & Hilfe</a>
-                <a href=#>FAQs</a>
-                <a href=#>Nutzungsbedingungen</a>
-                <a href=#>Datenschutzerklärung</a>
-            </div>
-
-            <div class="footer-menu">
-                <a> © CO2 2025</a>
-
-            </div>
-        </div>
-    </div>
-
-</body>
+    </body>
 
 </html>
