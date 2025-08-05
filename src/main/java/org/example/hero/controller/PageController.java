@@ -24,15 +24,4 @@ public class PageController {
         return "index";
 
     }
-
-    @GetMapping("/database")
-    public String database(HttpServletRequest request, Model model) {
-        model.addAttribute("currentPath", request.getRequestURI());
-        model.addAttribute("page", "database");
-        model.addAttribute("pageTitle", "Like Zero To Hero - DataBasa");
-        return "index";
-
-
-
-    }
 }
