@@ -9,7 +9,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -27,7 +26,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // UserDetailsService — загружает пользователя по username из базы и возвращает объект UserDetails
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
@@ -37,8 +35,8 @@ public class SecurityConfig {
             }
             return User.builder()
                     .username(appUser.getUsername())
-                    .password(appUser.getPassword()) // пароль уже должен быть зашифрован
-                    .authorities(List.of(() -> "ROLE_USER"))  // роли пользователя
+                    .password(appUser.getPassword())
+                    .authorities(List.of(() -> "ROLE_USER"))
                     .build();
         };
     }
@@ -47,12 +45,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/database", "/login", "/css/**").permitAll() // страницы для всех
-                        .anyRequest().authenticated() // все остальные требуют аутентификации
+                        .requestMatchers("/", "/database", "/login", "/css/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")  // твоя страница логина
-                        .defaultSuccessUrl("/edit", true) // куда редирект после успешного входа
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/database", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

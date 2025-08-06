@@ -11,17 +11,17 @@
 
         <h1>Daten in die Datenbank eingeben</h1>
 
-        <form method="get" th:action="@{/database}" class="new-record">
+        <form method="get" th:action="@{/edit}" class="new-record">
 
             <div>
                 <label for="country">Land: </label>
-                <input type="text" id="country" name="country"  th:value="${country}" />
+                <input type="text" id="country" name="new-country" th:value="${country}" />
 
                 <label for="year">Jahr: </label>
-                <input type="text" id="year" name="year"  th:value="${year}" />
+                <input type="text" id="year" name="new-year"  :value="${year}" />
 
                 <label for="emissions">Emissions: </label>
-                <input type="text" id="emissions" name="emissions"  th:value="${emissions}" />
+                <input type="text" id="emissions" name="new-emissions" th:value="${emissions}" />
             </div>
 
             <button type="submit" class="search-b">Submit</button>
