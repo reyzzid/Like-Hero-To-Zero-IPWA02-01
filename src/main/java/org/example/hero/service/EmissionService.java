@@ -1,7 +1,7 @@
 package org.example.hero.service;
 
 import org.example.hero.model.Emission;
-import org.example.hero.repository.EmissionRepository;
+import org.example.hero.repository.EmissionsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 @Service
 public class EmissionService {
 
-    private final EmissionRepository emissionRepository;
+    private final EmissionsRepository emissionRepository;
 
-    public EmissionService(EmissionRepository emissionRepository) {
+    public EmissionService(EmissionsRepository emissionRepository) {
         this.emissionRepository = emissionRepository;
     }
 

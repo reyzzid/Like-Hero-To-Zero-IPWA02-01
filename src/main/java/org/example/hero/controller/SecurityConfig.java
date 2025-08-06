@@ -30,14 +30,17 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         return username -> {
             org.example.hero.model.User appUser = userRepository.findByUsername(username);
+
             if (appUser == null) {
                 throw new UsernameNotFoundException("User not found");
             }
+
             return User.builder()
                     .username(appUser.getUsername())
                     .password(appUser.getPassword())
                     .authorities(List.of(() -> "ROLE_USER"))
                     .build();
+
         };
     }
 
@@ -48,16 +51,19 @@ public class SecurityConfig {
                         .requestMatchers("/", "/database", "/login", "/css/**").permitAll()
                         .anyRequest().authenticated()
                 )
+
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/database", true)
                         .permitAll()
                 )
+
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
+
         return http.build();
     }
 }
