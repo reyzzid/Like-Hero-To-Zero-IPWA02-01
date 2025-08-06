@@ -15,13 +15,4 @@ public class PageController {
         model.addAttribute("pageTitle", "Like Zero To Hero");
         return "index";
     }
-
-    @GetMapping("/login")
-    public String login(HttpServletRequest request, Model model) {
-        model.addAttribute("currentPath", request.getRequestURI());
-        model.addAttribute("page", "login");
-        model.addAttribute("pageTitle", "Like Zero To Hero - Login");
-        return "index";
-
-    }
 }

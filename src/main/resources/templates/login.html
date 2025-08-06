@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 
-
 <head>
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="/style.css" />
-
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/style.css" />
+    <title th:text="${pageTitle}"></title>
 </head>
-
 <div th:fragment="content">
     <div class="login">
         <h1>Login</h1>
         <a> Welcome back</a>
 
-        <div class="inputs">
+        <form class="inputs" th:action="@{/login}" method="post">
             <div class="login-input">
-                <a>Email</a>
-                <input>
+                <label> Email
+                    <input type="text" name="username" th:value="${username}" />
+                </label>
             </div>
 
             <div class="login-input">
-                <a>Password</a>
-                <input>
+                <label> Password
+                    <input type="password" name="password"/>
+                </label>
             </div>
-        </div>
 
-         <a class="login-error">Wrong password</a>
-        <button class="login-b"> Login </button>
+            <div th:if="${error}" class="error">
+                <a class="error" th:text="${error}"></a>
+            </div>
+
+            <button class="login-b" type="submit"> Login </button>
+        </form>
+
+
     </div>
 
 </div>

@@ -131,7 +131,7 @@ a.active:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative
+    position: relative;
 }
 
 h1 {
@@ -160,7 +160,7 @@ h1 {
 }
 
 .login-input input {
-    margin: 0;
+    margin: 4px 0 0 0;
     box-sizing: border-box;
     height: 40px;
     width: 380px;
@@ -193,3 +193,6 @@ h1 {
     margin: 2em 0;
 }
 
+a.error {
+    margin: 0 1em;
+}

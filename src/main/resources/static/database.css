@@ -133,6 +133,7 @@ input:focus {
 .pagination li.active {
     font-weight: bold;
     background-color: rgb(227, 227, 227);
+    border-radius: 4px;
 }
 
 th {
