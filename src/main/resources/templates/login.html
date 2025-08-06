@@ -2,9 +2,10 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title th:text="${pageTitle}"></title>
 </head>
+
 <div th:fragment="content">
     <div class="login">
         <h1>Login</h1>
@@ -19,7 +20,7 @@
 
             <div class="login-input">
                 <label> Password
-                    <input type="password" name="password"/>
+                    <input type="password" name="password" maxlength="72" required/>
                 </label>
             </div>
 

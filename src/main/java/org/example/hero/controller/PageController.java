@@ -15,4 +15,13 @@ public class PageController {
         model.addAttribute("pageTitle", "Like Zero To Hero");
         return "index";
     }
+
+    @GetMapping("/edit")
+    public String editPage(HttpServletRequest request, Model model) {
+        model.addAttribute("currentPath", request.getRequestURI());
+        model.addAttribute("page", "edit");
+        model.addAttribute("pageTitle", "Like Zero To Hero - New Record");
+        return "index";
+    }
+
 }

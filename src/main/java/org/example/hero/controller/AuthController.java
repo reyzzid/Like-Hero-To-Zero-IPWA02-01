@@ -3,7 +3,6 @@ package org.example.hero.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.example.hero.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,6 +37,14 @@ public class AuthController {
                         @RequestParam String password,
                         HttpSession session,
                         Model model) {
+
+        if (password.length() > 72) {
+            model.addAttribute("error", "Пароль слишком длинный");
+            model.addAttribute("username", username);
+            model.addAttribute("page", "login");
+            return "index";
+        }
+
         User user = userRepository.findByUsername(username);
 
 

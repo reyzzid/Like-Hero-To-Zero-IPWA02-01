@@ -170,3 +170,17 @@ th {
     padding: 0;
     margin-bottom: 0;
 }
+
+.new-record {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-record input {
+    margin-right: 8px;
+}
+
+.container h1 {
+    margin: 0 0 0.4em 0;
+}

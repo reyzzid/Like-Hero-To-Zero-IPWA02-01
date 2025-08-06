@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title th:text="${pageTitle}"></title>
+</head>
+
+<div th:fragment="content">
+    <div class="container">
+
+        <h1>Daten in die Datenbank eingeben</h1>
+
+        <form method="get" th:action="@{/database}" class="new-record">
+
+            <div>
+                <label for="country">Land: </label>
+                <input type="text" id="country" name="country"  th:value="${country}" />
+
+                <label for="year">Jahr: </label>
+                <input type="text" id="year" name="year"  th:value="${year}" />
+
+                <label for="emissions">Emissions: </label>
+                <input type="text" id="emissions" name="emissions"  th:value="${emissions}" />
+            </div>
+
+            <button type="submit" class="search-b">Submit</button>
+        </form>
+    </div>
+</div>
+
+
