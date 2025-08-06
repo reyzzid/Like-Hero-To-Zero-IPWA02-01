@@ -51,5 +51,4 @@ public class PageController {
 
         return "redirect:/edit#pending";
     }
-
 }

@@ -40,4 +40,27 @@ public class PendingRecordsController {
         return "redirect:/edit#pending";
     }
 
+
+    @PostMapping("/database/delete")
+    public String deleteEmission(@RequestParam Long id) {
+        emissionsRepository.deleteById(id);
+        return "redirect:/database";
+    }
+
+    @PostMapping("/database/edit")
+    public String updateEmission(@RequestParam Long id,
+                                 @RequestParam String country,
+                                 @RequestParam int year,
+                                 @RequestParam long emissions) {
+        Emission emission = emissionsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ID: " + id));
+
+        emission.setCountry(country);
+        emission.setYear(year);
+        emission.setEmissions(emissions);
+
+        emissionsRepository.save(emission);
+        return "redirect:/database";
+    }
+
 }
