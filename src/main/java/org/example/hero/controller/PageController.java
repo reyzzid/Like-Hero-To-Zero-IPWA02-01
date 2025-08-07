@@ -21,8 +21,8 @@ public class PageController {
     @GetMapping("/")
     public String home(HttpServletRequest request, Model model) {
         model.addAttribute("currentPath", request.getRequestURI());
-        model.addAttribute("page", "home");
-        model.addAttribute("pageTitle", "Like Zero To Hero");
+        model.addAttribute("page", "database");
+        model.addAttribute("pageTitle", "Like Zero To Hero - Database");
         return "index";
     }
 
