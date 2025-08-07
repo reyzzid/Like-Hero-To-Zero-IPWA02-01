@@ -33,22 +33,20 @@
                     </div>
                 </div>
 
-
                 <div class="pagination">
                     <ul>
-                        <!-- Первая страница -->
+
                         <li th:classappend="${currentPage == 0} ? 'disabled'">
                             <a th:if="${currentPage > 0}" th:href="@{/database(page=0, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">«</a>
                             <span th:if="${currentPage == 0}">«</span>
                         </li>
 
-                        <!-- Предыдущая страница -->
+
                         <li th:classappend="${currentPage == 0} ? 'disabled'">
                             <a th:if="${currentPage > 0}" th:href="@{/database(page=${currentPage - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">‹</a>
                             <span th:if="${currentPage == 0}">‹</span>
                         </li>
 
-                        <!-- Начало диапазона -->
                         <li th:if="${currentPage > 1}">
                             <a th:href="@{/database(page=0, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">1</a>
                         </li>
@@ -56,7 +54,6 @@
                             <a>...</a>
                         </li>
 
-                        <!-- Текущая, предыдущая и следующая страницы -->
                         <li th:if="${currentPage > 0}">
                             <a th:href="@{/database(page=${currentPage - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}" th:text="${currentPage}"></a>
                         </li>
@@ -67,7 +64,6 @@
                             <a th:href="@{/database(page=${currentPage + 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}" th:text="${currentPage + 2}"></a>
                         </li>
 
-                        <!-- Конец диапазона -->
                         <li class="dots" th:if="${currentPage + 2 < totalPages - 1}">
                             <a>...</a>
                         </li>
@@ -75,20 +71,18 @@
                             <a th:href="@{/database(page=${totalPages - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}" th:text="${totalPages}"></a>
                         </li>
 
-                        <!-- Следующая страница -->
                         <li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
                             <a th:if="${currentPage < totalPages - 1}" th:href="@{/database(page=${currentPage + 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">›</a>
                             <span th:if="${currentPage == totalPages - 1}">›</span>
                         </li>
 
-                        <!-- Последняя страница -->
                         <li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
                             <a th:if="${currentPage < totalPages - 1}" th:href="@{/database(page=${totalPages - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">»</a>
                             <span th:if="${currentPage == totalPages - 1}">»</span>
                         </li>
+
                     </ul>
                 </div>
-
 
             </div>
 
