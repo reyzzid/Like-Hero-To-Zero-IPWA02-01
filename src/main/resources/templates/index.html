@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:inline="javascript">
 
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/co2-logo.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/database.css" />
-    <title th:text="${pageTitle}">Default Title</title>
-
-<!--    <meta http-equiv="refresh" content="5">-->
-
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title th:text="${pageTitle}"></title>
 </head>
 
     <body>
@@ -20,17 +18,24 @@
 
                 <div class="navbar">
 
-                    <a th:href="@{/}">
+                    <a th:href="@{/database}">
                         <img class="logo" src="/co2-logo.svg" alt="Logo" />
                     </a>
 
                     <div class="menu">
-                        <a th:href="@{/}" th:classappend="${currentPath == '/'} ? 'active'">Home</a>
+
                         <a th:href="@{/database}" th:classappend="${currentPath == '/database'} ? 'active'">Database</a>
-                        <a class="adminpanel "th:href="@{/database}" th:classappend="${currentPath == '/adminpanel'} ? 'active'">Admin Panel</a>
+                        <a class="newrecord" th:href="@{/edit}" th:classappend="${currentPath == '/edit'} ? 'active'" sec:authorize="isAuthenticated()" style="display: flex">New record</a>
+
                     </div>
 
-                    <button class="sign-in" onclick="window.location.href='/login'"> Sign In </button>
+                    <a sec:authorize="isAnonymous()" style="display: flex">
+                        <button class="sign-in" onclick="window.location.href='/login'"> Sign In </button>
+                    </a>
+
+                    <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" style="display: flex">
+                        <button type="submit" class="sign-in"> Log Out </button>
+                    </form>
 
 
                 </div>
@@ -61,6 +66,32 @@
                 </div>
             </div>
         </div>
-    </body>
 
+
+        <script>
+
+            function openEditModal(button) {
+
+                const id = button.getAttribute('data-id');
+                const country = button.getAttribute('data-country');
+                const year = button.getAttribute('data-year');
+                const emissions = button.getAttribute('data-emissions');
+
+                document.getElementById('edit-id').value = id;
+                document.getElementById('edit-country').value = country;
+                document.getElementById('edit-year').value = year;
+                document.getElementById('edit-emissions').value = emissions;
+
+                document.getElementById('editModal').style.display = 'block';
+            }
+
+            function closeEditModal() {
+                document.getElementById('editModal').style.display = 'none';
+                document.getElementById('editForm').reset();
+            }
+
+        </script>
+
+
+    </body>
 </html>

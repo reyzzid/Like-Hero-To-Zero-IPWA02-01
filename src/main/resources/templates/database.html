@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-
-  <head>
-    <title>DataBase</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/database.css" />
-    <link rel="stylesheet" href="/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
-  </head>
-
 <div>
     <div th:fragment="content">
 
@@ -44,110 +33,130 @@
                     </div>
                 </div>
 
-
                 <div class="pagination">
                     <ul>
 
                         <li th:classappend="${currentPage == 0} ? 'disabled'">
-                            <a th:if="${currentPage != 0}" th:href="@{/database(page=0, country=${selectedCountry})}">«</a>
+                            <a th:if="${currentPage > 0}" th:href="@{/database(page=0, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">«</a>
                             <span th:if="${currentPage == 0}">«</span>
                         </li>
 
+
                         <li th:classappend="${currentPage == 0} ? 'disabled'">
-                            <a th:if="${currentPage != 0}" th:href="@{/database(page=${currentPage - 1}, country=${selectedCountry})}">‹</a>
+                            <a th:if="${currentPage > 0}" th:href="@{/database(page=${currentPage - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">‹</a>
                             <span th:if="${currentPage == 0}">‹</span>
                         </li>
 
-                        <li th:if="${currentPage == 0}" th:classappend="'active'">
-                            <span>1</span>
-                        </li>
-
-                        <li th:if="${currentPage == 0 and totalPages > 1}">
-                            <a th:href="@{/database(page=1, country=${selectedCountry})}">2</a>
-                        </li>
-
                         <li th:if="${currentPage > 1}">
-                            <a th:href="@{/database(page=0, country=${selectedCountry}, sort=${sortField}, dir=${sortDir})}">1</a>
+                            <a th:href="@{/database(page=0, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">1</a>
                         </li>
-
                         <li class="dots" th:if="${currentPage > 2}">
                             <a>...</a>
                         </li>
 
-                        <li th:if="${currentPage == totalPages - 1 and totalPages > 1}">
-                            <a th:href="@{/database(page=${currentPage - 1}, country=${selectedCountry})}" th:text="${currentPage}"></a>
+                        <li th:if="${currentPage > 0}">
+                            <a th:href="@{/database(page=${currentPage - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}" th:text="${currentPage}"></a>
                         </li>
-
-                        <li th:if="${currentPage == totalPages - 1}" th:classappend="'active'">
+                        <li class="active">
                             <span th:text="${currentPage + 1}"></span>
                         </li>
-
-
-                        <li th:if="${currentPage > 0 and currentPage < totalPages - 1}">
-                            <a th:href="@{/database(page=${currentPage - 1}, country=${selectedCountry})}" th:text="${currentPage}"></a>
-                        </li>
-
-                        <li th:if="${currentPage > 0 and currentPage < totalPages - 1}" class="active">
-                            <span th:text="${currentPage + 1}"></span>
-                        </li>
-
-                        <li th:if="${currentPage > 0 and currentPage < totalPages - 1}">
-                            <a th:href="@{/database(page=${currentPage + 1}, country=${selectedCountry})}" th:text="${currentPage + 2}"></a>
+                        <li th:if="${currentPage < totalPages - 1}">
+                            <a th:href="@{/database(page=${currentPage + 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}" th:text="${currentPage + 2}"></a>
                         </li>
 
                         <li class="dots" th:if="${currentPage + 2 < totalPages - 1}">
                             <a>...</a>
                         </li>
-
-                        <li th:if="${currentPage + 2 < totalPages}">
-                            <a th:href="@{/database(page=${totalPages - 1}, country=${selectedCountry}, sort=${sortField}, dir=${sortDir})}" th:text="${totalPages}"></a>
+                        <li th:if="${currentPage < totalPages - 2}">
+                            <a th:href="@{/database(page=${totalPages - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}" th:text="${totalPages}"></a>
                         </li>
 
                         <li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
-                            <a th:if="${currentPage != totalPages - 1}" th:href="@{/database(page=${currentPage + 1}, country=${selectedCountry})}">›</a>
+                            <a th:if="${currentPage < totalPages - 1}" th:href="@{/database(page=${currentPage + 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">›</a>
                             <span th:if="${currentPage == totalPages - 1}">›</span>
                         </li>
 
                         <li th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
-                            <a th:if="${currentPage != totalPages - 1}" th:href="@{/database(page=${totalPages - 1}, country=${selectedCountry})}">»</a>
+                            <a th:if="${currentPage < totalPages - 1}" th:href="@{/database(page=${totalPages - 1}, sort=${sortField}, dir=${sortDir}, country=${selectedCountry})}">»</a>
                             <span th:if="${currentPage == totalPages - 1}">»</span>
                         </li>
+
                     </ul>
                 </div>
 
             </div>
 
-        <table id="table">
+            <table id="table">
 
-        <tr class="header-row" >
-        <th>
-        Land
-        <a th:href="@{/database(sort='country', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})} " class="sort-btn">⇅</a>
-        </th>
-        <th>
-        Jahr
-        <a th:href="@{/database(sort='year', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})}" class="sort-btn">⇅</a>
-        </th>
-        <th>
-        Emissionen (kt)
-        <a th:href="@{/database(sort='emissions', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})}" class="sort-btn">⇅</a>
-        </th>
-        </tr>
+                <tr class="header-row" >
+                    <th>
+                        Land
+                        <a th:href="@{/database(sort='country', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})} " class="sort-btn">⇅</a>
+                    </th>
 
-        <tr th:each="emission : ${emissions}">
-        <td th:text="${emission.country}"></td>
-        <td th:text="${emission.year}"></td>
-        <td th:text="${emission.emissions}"></td>
-        </tr>
+                    <th>
+                        Jahr
+                        <a th:href="@{/database(sort='year', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})}" class="sort-btn">⇅</a>
+                    </th>
 
-        </table>
+                    <th>
+                        Emissionen (kt)
+                        <a th:href="@{/database(sort='emissions', dir=${sortDir == 'asc' ? 'desc' : 'asc'}, page=${currentPage}, country=${selectedCountry})}" class="sort-btn">⇅</a>
+                    </th>
 
+                    <th sec:authorize="isAuthenticated()">Actions</th>
+                </tr>
 
+                <tr th:each="emission : ${emissions}">
+                    <td th:text="${emission.country}"></td>
+                    <td th:text="${emission.year}"></td>
+                    <td th:text="${emission.emissions}"></td>
 
+                    <td sec:authorize="isAuthenticated()">
+                        <form th:action="@{/database/delete}" method="post" style="display:inline">
+                            <input type="hidden" name="id" th:value="${emission.id}" />
+                            <button class="submit-b" type="submit">Delete</button>
+                        </form>
 
+                        <button class="submit-b"
+                                type="button"
+                                th:attr="data-id=${emission.id}, data-country=${emission.country}, data-year=${emission.year}, data-emissions=${emission.emissions}"
+                                onclick="openEditModal(this)">
+                            Edit
+                        </button>
+
+                    </td>
+                </tr>
+
+            </table>
+
+            <div id="editModal" class="modal">
+
+                <form id="editForm" class="form"
+                      style="display: flex;
+                      flex-direction: column;"
+                      th:action="@{/database/edit}"
+                      method="post">
+
+                    <input type="hidden" name="id" id="edit-id" />
+
+                    <label>Land:</label>
+                    <input type="text" name="country" id="edit-country" required/><br/>
+
+                    <label>Jahr:</label>
+                    <input type="number" name="year" id="edit-year" required/><br/>
+
+                    <label>Emissionen (kt):</label>
+                    <input type="number" name="emissions" id="edit-emissions" required/><br/>
+
+                    <div class="buttons">
+                        <button class="search-b" type="submit">Submit</button>
+                        <button class="search-b" type="button" onclick="closeEditModal()">Cancel</button>
+                    </div>
+
+                </form>
+            </div>
 
         </div>
     </div>
 </div>
-
-

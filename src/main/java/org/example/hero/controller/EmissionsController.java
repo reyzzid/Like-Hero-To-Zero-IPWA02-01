@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 @Controller
@@ -28,11 +27,12 @@ public class EmissionsController {
                             @RequestParam(defaultValue = "0") int page,
                             @RequestParam(required = false) String country,
                             @RequestParam(defaultValue = "year") String sort,
-                            @RequestParam(defaultValue = "desc") String dir){
+                            @RequestParam(defaultValue = "desc") String dir)
 
+    {
         model.addAttribute("currentPath", request.getRequestURI());
         model.addAttribute("page", "database");
-        model.addAttribute("pageTitle", "Like Zero To Hero - DataBasa");
+        model.addAttribute("pageTitle", "DataBase - Like Zero To Hero");
 
         List<String> countries = emissionService.findUniqueCountries();
         model.addAttribute("countries", countries);
@@ -46,6 +46,7 @@ public class EmissionsController {
             model.addAttribute("emissions", filtered.getContent());
             model.addAttribute("totalPages", filtered.getTotalPages());
             model.addAttribute("selectedCountry", country);
+
         } else {
             Page<Emission> all = emissionService.findAll(pageable);
             model.addAttribute("emissions", all.getContent());

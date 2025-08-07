@@ -1,6 +1,15 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="CssUnknownProperty" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myCustomPropertiesEnabled" value="false" />
+      <option name="myIgnoreVendorSpecificProperties" value="true" />
+      <option name="myCustomPropertiesList">
+        <value>
+          <list size="0" />
+        </value>
+      </option>
+    </inspection_tool>
     <inspection_tool class="GrazieInspection" enabled="false" level="GRAMMAR_ERROR" enabled_by_default="false" />
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
@@ -12,11 +21,54 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
+    <inspection_tool class="JpaDataSourceORMInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="LanguageDetectionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
       <option name="processCode" value="true" />
       <option name="processLiterals" value="true" />
       <option name="processComments" value="true" />
+    </inspection_tool>
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+          <option value="LikeHeroToZero" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="ch.qos.logback:logback-classic:1.4.14" />
+          <option value="ch.qos.logback:logback-core:1.4.14" />
+          <option value="org.apache.tomcat.embed:tomcat-embed-core:10.1.20" />
+          <option value="org.springframework:spring-context:6.1.6" />
+          <option value="org.springframework:spring-web:6.1.6" />
+          <option value="org.springframework:spring-webmvc:6.1.6" />
+          <option value="org.springframework.security:spring-security-config:6.2.4" />
+          <option value="org.springframework.security:spring-security-core:6.2.4" />
+          <option value="org.springframework.security:spring-security-web:6.2.4" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+        </list>
+      </option>
     </inspection_tool>
   </profile>
 </component>

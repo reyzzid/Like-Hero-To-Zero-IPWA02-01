@@ -1,36 +1,30 @@
 package org.example.hero.model;
 
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "co2_emissions")
-public class Emission {
+@Table(name = "pending_records")
+public class PendingRecords {
 
     @Id
     private int id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String country;
 
     @Column (nullable = false)
     private int year;
 
     @Column (nullable = false)
-    private BigInteger  emissions;
+    private BigInteger emissions;
 
-    public Emission() {}
-
-    public Emission (int id, String country, int year, BigInteger  emissions) {
-        this.id=id;
-        this.country=country;
-        this.year=year;
-        this.emissions=emissions;
-    }
+    public PendingRecords() {}
 
     public int getId() {
         return id;
@@ -52,12 +46,11 @@ public class Emission {
         this.year=year;
     }
 
-    public BigInteger  getEmissions() {
+    public BigInteger getEmissions() {
         return emissions;
     }
 
-    public void setEmissions (BigInteger emissions){
+    public void setEmissions (BigInteger  emissions){
         this.emissions=emissions;
     }
-
 }
