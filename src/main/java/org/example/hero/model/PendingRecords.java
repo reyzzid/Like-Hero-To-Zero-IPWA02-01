@@ -26,13 +26,6 @@ public class PendingRecords {
 
     public PendingRecords() {}
 
-    public PendingRecords (int id, String country, int year, BigInteger  emissions) {
-        this.id=id;
-        this.country=country;
-        this.year=year;
-        this.emissions=emissions;
-    }
-
     public int getId() {
         return id;
     }
