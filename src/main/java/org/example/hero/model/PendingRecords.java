@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.math.BigInteger;
+
 @Entity
 @Table(name = "pending_records")
 public class PendingRecords {
@@ -20,11 +22,11 @@ public class PendingRecords {
     private int year;
 
     @Column (nullable = false)
-    private long emissions;
+    private BigInteger emissions;
 
     public PendingRecords() {}
 
-    public PendingRecords (int id, String country, int year, long emissions) {
+    public PendingRecords (int id, String country, int year, BigInteger  emissions) {
         this.id=id;
         this.country=country;
         this.year=year;
@@ -51,11 +53,11 @@ public class PendingRecords {
         this.year=year;
     }
 
-    public long getEmissions() {
+    public BigInteger getEmissions() {
         return emissions;
     }
 
-    public void setEmissions (long emissions){
+    public void setEmissions (BigInteger  emissions){
         this.emissions=emissions;
     }
 }

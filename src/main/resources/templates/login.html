@@ -11,7 +11,7 @@
 
         <form class="inputs" th:action="@{/login}" method="post">
             <div class="login-input">
-                <label> Email
+                <label> Login
                     <input type="text" name="username" th:value="${username}" />
                 </label>
             </div>
@@ -22,8 +22,8 @@
                 </label>
             </div>
 
-            <div th:if="${error}" class="error">
-                <a class="error" th:text="${error}"></a>
+            <div th:if="${param.error}">
+                <a class="error">Falsches Benutzername oder Passwort!</a>
             </div>
 
             <button class="login-b" type="submit"> Login </button>
@@ -31,5 +31,4 @@
 
 
     </div>
-
 </div>

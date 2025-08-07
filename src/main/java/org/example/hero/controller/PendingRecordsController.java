@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigInteger;
+
 @Controller
 public class PendingRecordsController {
 
@@ -51,7 +53,7 @@ public class PendingRecordsController {
     public String updateEmission(@RequestParam Long id,
                                  @RequestParam String country,
                                  @RequestParam int year,
-                                 @RequestParam long emissions) {
+                                 @RequestParam BigInteger emissions) {
         Emission emission = emissionsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ID: " + id));
 

@@ -5,6 +5,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
+import java.math.BigInteger;
+
 @Entity
 @Table(name = "co2_emissions")
 public class Emission {
@@ -19,11 +21,11 @@ public class Emission {
     private int year;
 
     @Column (nullable = false)
-    private long emissions;
+    private BigInteger  emissions;
 
     public Emission() {}
 
-    public Emission (int id, String country, int year, long emissions) {
+    public Emission (int id, String country, int year, BigInteger  emissions) {
         this.id=id;
         this.country=country;
         this.year=year;
@@ -50,11 +52,11 @@ public class Emission {
         this.year=year;
     }
 
-    public long getEmissions() {
+    public BigInteger  getEmissions() {
         return emissions;
     }
 
-    public void setEmissions (long emissions){
+    public void setEmissions (BigInteger emissions){
         this.emissions=emissions;
     }
 

@@ -9,7 +9,6 @@
     <link rel="icon" href="/co2-logo.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" th:href="@{/css/database.css}" />
     <title th:text="${pageTitle}"></title>
 </head>
 
@@ -19,15 +18,14 @@
 
                 <div class="navbar">
 
-                    <a th:href="@{/}">
+                    <a th:href="@{/database}">
                         <img class="logo" src="/co2-logo.svg" alt="Logo" />
                     </a>
 
                     <div class="menu">
-                        <a th:href="@{/}" th:classappend="${currentPath == '/'} ? 'active'">Home</a>
-                        <a th:href="@{/database}" th:classappend="${currentPath == '/database'} ? 'active'">Database</a>
 
-                        <a class="adminpanel" th:href="@{/edit}" th:classappend="${currentPath == '/edit'} ? 'active'" sec:authorize="isAuthenticated()" style="display: flex">New Record</a>
+                        <a th:href="@{/database}" th:classappend="${currentPath == '/database'} ? 'active'">Database</a>
+                        <a class="newrecord" th:href="@{/edit}" th:classappend="${currentPath == '/edit'} ? 'active'" sec:authorize="isAuthenticated()" style="display: flex">New record</a>
 
                     </div>
 

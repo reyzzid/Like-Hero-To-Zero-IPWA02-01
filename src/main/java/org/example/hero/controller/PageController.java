@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigInteger;
+
 @Controller
 public class PageController {
 
@@ -22,15 +24,15 @@ public class PageController {
     public String home(HttpServletRequest request, Model model) {
         model.addAttribute("currentPath", request.getRequestURI());
         model.addAttribute("page", "database");
-        model.addAttribute("pageTitle", "Like Zero To Hero - Database");
-        return "index";
+        model.addAttribute("pageTitle", "Like Zero To Hero");
+        return "redirect:/database";
     }
 
     @GetMapping("/edit")
     public String editPage(HttpServletRequest request, Model model) {
         model.addAttribute("currentPath", request.getRequestURI());
         model.addAttribute("page", "edit");
-        model.addAttribute("pageTitle", "Like Zero To Hero - New Record");
+        model.addAttribute("pageTitle", "New Record - Like Zero To Hero");
 
         model.addAttribute("pendingRecords", pendingRecordsRepository.findAll());
 
@@ -41,7 +43,7 @@ public class PageController {
     public String submitRecord(
             @RequestParam String country,
             @RequestParam int year,
-            @RequestParam long emissions
+            @RequestParam BigInteger emissions
     ) {
         PendingRecords record = new PendingRecords();
         record.setCountry(country);

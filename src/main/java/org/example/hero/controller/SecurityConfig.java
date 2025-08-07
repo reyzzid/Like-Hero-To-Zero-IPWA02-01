@@ -48,12 +48,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/database", "/login", "/css/**").permitAll()
+                        .requestMatchers("/", "/database", "/login", "/css/**", "/co2-logo.svg").permitAll()
                         .anyRequest().authenticated()
                 )
 
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .failureUrl("/login?error")
                         .defaultSuccessUrl("/database", true)
                         .permitAll()
                 )
@@ -66,4 +67,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }
